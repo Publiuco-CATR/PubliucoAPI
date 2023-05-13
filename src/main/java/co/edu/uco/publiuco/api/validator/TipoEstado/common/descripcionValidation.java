@@ -2,6 +2,8 @@ package co.edu.uco.publiuco.api.validator.TipoEstado.common;
 
 import co.edu.uco.publiuco.api.validator.Result;
 import co.edu.uco.publiuco.api.validator.Validation;
+import co.edu.uco.publiuco.utils.UtilText;
+import co.edu.uco.publiuco.utils.UtilUUID;
 
 public class descripcionValidation implements Validation<String>{
 
@@ -15,8 +17,15 @@ public class descripcionValidation implements Validation<String>{
 	
 	@Override
 	public Result excecute(String data) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		var result = Result.create();
+	
+		if (true) {
+			//minimo 1 máximo 30
+			//validar longitud de la cadena
+			result.addMessage("El nombre del tipo estado no debe ser mayor a 250 caracteres...");
+		}
+		return result;
 	}
 	
 }
