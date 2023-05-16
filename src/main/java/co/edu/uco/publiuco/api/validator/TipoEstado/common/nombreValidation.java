@@ -1,4 +1,4 @@
-package co.edu.uco.publiuco.api.validator.TipoEstado.common;
+package co.edu.uco.publiuco.api.validator.tipoestado.common;
 
 import co.edu.uco.publiuco.api.validator.Result;
 import co.edu.uco.publiuco.api.validator.Validation;
@@ -13,11 +13,11 @@ public class nombreValidation implements Validation<String>{
 	}
 	
 	public static final Result validate(final String data) {
-		return new nombreValidation().excecute(data);
+		return new nombreValidation().execute(data);
 	}
 	
 	@Override
-	public Result excecute(String data) {
+	public Result execute(String data) {
 
 		var result = Result.create();
 		

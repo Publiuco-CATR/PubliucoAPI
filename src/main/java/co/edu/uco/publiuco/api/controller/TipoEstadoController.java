@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uco.publiuco.api.controller.response.Response;
-import co.edu.uco.publiuco.api.validator.TipoEstado.RegistrarTipoEstadoValidation;
+import co.edu.uco.publiuco.api.validator.tipoestado.RegistrarTipoEstadoValidation;
 import co.edu.uco.publiuco.busisness.facade.impl.TipoEstadoFacadeImpl;
 import co.edu.uco.publiuco.crosscutting.exception.PubliucoException;
 import co.edu.uco.publiuco.dto.TipoEstadoDTO;

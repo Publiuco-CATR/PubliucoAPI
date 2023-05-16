@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Validation<T> {
 
-	Result excecute(T data);
+	Result execute(T data);
 }
