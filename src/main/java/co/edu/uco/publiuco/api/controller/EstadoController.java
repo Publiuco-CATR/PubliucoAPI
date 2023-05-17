@@ -46,12 +46,14 @@ public final class EstadoController {
 		messages.add("Estados consultados exitosamente");
 		
 		Response<EstadoDTO> response = new Response<>(list,messages);
-		return new ResponseEntity<Response<EstadoDTO>>(response,HttpStatus.OK);
+		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
+	
 	@GetMapping("/{id}")
 	public EstadoDTO listById(@PathVariable UUID id) {
 		return EstadoDTO.create().setIdentificador(id);
 	}
+	
 	@PostMapping
 	public ResponseEntity<Response<EstadoDTO>> create(@RequestParam EstadoDTO dto) {
 		var statusCode = HttpStatus.OK;

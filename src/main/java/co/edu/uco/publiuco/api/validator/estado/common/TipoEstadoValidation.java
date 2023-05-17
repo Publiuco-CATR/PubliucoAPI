@@ -6,6 +6,9 @@ import co.edu.uco.publiuco.dto.TipoEstadoDTO;
 import co.edu.uco.publiuco.utils.UtilObject;
 
 public class TipoEstadoValidation implements Validation<TipoEstadoDTO> {
+	
+	public static final TipoEstadoDTO INSTANCE = TipoEstadoDTO.create();
+	
 	private TipoEstadoValidation() {
 		super();
 	}
@@ -14,11 +17,13 @@ public class TipoEstadoValidation implements Validation<TipoEstadoDTO> {
 	}
 	@Override
 	public Result execute(TipoEstadoDTO data) {
-		var result = Result.create();
+		final var result = Result.create();
 		
 		if(UtilObject.isNull(data)) {
-			result.addMessage("No es posible continuar con el Tipo Estado vacio");
-			
+			result.addMessage("No es posible continuar con el Tipo Estado vacio");			
+		}
+		if (UtilObject.isDefault(data, INSTANCE)) {
+			result.addMessage("No es posible continuar con el tipo Estado vacio");
 		}
 		return result;
 	}

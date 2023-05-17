@@ -8,6 +8,9 @@ import co.edu.uco.publiuco.utils.UtilUUID;
 
 public class nombreValidation implements Validation<String>{
 
+	private static final int MINIMUN_LENGHT = 1;
+	private static final int MAXIMUN_LENGHT = 150;
+	
 	private nombreValidation() {
 		super();
 	}
@@ -21,16 +24,14 @@ public class nombreValidation implements Validation<String>{
 
 		var result = Result.create();
 		
-		if (UtilText.getUtilText().isEmpty(data)) {
-			result.addMessage("No es posible continuar con el identificador de tipo estado vacio");
-		} else { 
-			if (true) {
-				//minimo 1 máximo 30
-				//validar longitud de la cadena
+		if (UtilText.isEmpty(data)) {
+			result.addMessage("No es posible continuar con el nombre de tipo estado vacio");
+		} 
+		else { 
+			if (!UtilText.getUtilText().textHasLenghtAllowed(data, MINIMUN_LENGHT, MAXIMUN_LENGHT)) {
 				result.addMessage("El nombre del tipo estado no debe ser menor a 1 y mayor a 30 caracteres");
 			}
-			if (true) {
-				//formato: solo letras y espacios
+			if (!UtilText.getUtilText().textHasOnlyLetters(data)) {
 				result.addMessage("El nombre de un tipo de estado solo puede tener nombres y espacios.");
 			}
 		}
