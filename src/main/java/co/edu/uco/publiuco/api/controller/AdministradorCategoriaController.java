@@ -11,30 +11,34 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uco.publiuco.api.controller.response.Response;
+import co.edu.uco.publiuco.api.validator.administradorcategoria.EliminarAdministradorCategoriaValidation;
 import co.edu.uco.publiuco.api.validator.administradorcategoria.ModificarAdministradorCategoriaValidation;
 import co.edu.uco.publiuco.api.validator.administradorcategoria.RegistrarAdministradorCategoriaValidation;
-import co.edu.uco.publiuco.api.validator.estado.EliminarEstadoValidation;
 import co.edu.uco.publiuco.busisness.facade.AdministradorCategoriaFacade;
 import co.edu.uco.publiuco.busisness.facade.impl.AdministradorCategoriaFacadeImpl;
 import co.edu.uco.publiuco.crosscutting.exception.PubliucoException;
 import co.edu.uco.publiuco.dto.AdministradorCategoriaDTO;
 
+@RestController
+@RequestMapping("publiuco/api/v1/administradorcategoria")
 public class AdministradorCategoriaController {
 	private AdministradorCategoriaFacade facade;
 	
-	public AdministradorCategoriaController() {
-		facade = new AdministradorCategoriaFacadeImpl();
-	}
+	
 	@GetMapping("/dummy")
 	public AdministradorCategoriaDTO dummy() {
 		return AdministradorCategoriaDTO.create();
 	}
 	
 	@GetMapping
-	public ResponseEntity<Response<AdministradorCategoriaDTO>> list(@RequestParam AdministradorCategoriaDTO dto) {
+	public ResponseEntity<Response<AdministradorCategoriaDTO>> list(@RequestBody AdministradorCategoriaDTO dto) {
+		facade = new AdministradorCategoriaFacadeImpl();
+
 		List<AdministradorCategoriaDTO> list = new ArrayList<>();
 		
 		List<String> messages = new ArrayList<>();
@@ -44,7 +48,9 @@ public class AdministradorCategoriaController {
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 	@PostMapping
-	public ResponseEntity<Response<AdministradorCategoriaDTO>> create(@RequestParam AdministradorCategoriaDTO dto) {
+	public ResponseEntity<Response<AdministradorCategoriaDTO>> create(@RequestBody AdministradorCategoriaDTO dto) {
+		facade = new AdministradorCategoriaFacadeImpl();
+
 		var statusCode = HttpStatus.OK;
 		Response<AdministradorCategoriaDTO> response = new Response<>();
 		
@@ -74,7 +80,9 @@ public class AdministradorCategoriaController {
 		return new ResponseEntity<>(response,statusCode);
 	}
 	@PutMapping
-	public ResponseEntity<Response<AdministradorCategoriaDTO>> update(@PathVariable UUID id, @RequestParam AdministradorCategoriaDTO dto) {
+	public ResponseEntity<Response<AdministradorCategoriaDTO>> update(@PathVariable UUID id, @RequestBody AdministradorCategoriaDTO dto) {
+		facade = new AdministradorCategoriaFacadeImpl();
+
 		var statusCode = HttpStatus.OK;
 		var response = new Response<AdministradorCategoriaDTO>();
 		
@@ -105,11 +113,13 @@ public class AdministradorCategoriaController {
 	}
 	@DeleteMapping
 	public ResponseEntity<Response<AdministradorCategoriaDTO>> drop(@PathVariable UUID id) {
+		facade = new AdministradorCategoriaFacadeImpl();
+
 		var statusCode = HttpStatus.OK;
 		var response = new Response<AdministradorCategoriaDTO>();
 		
 		try {
-			var result = EliminarEstadoValidation.validate(id);
+			var result = EliminarAdministradorCategoriaValidation.validate(id);
 			if(result.getMessages().isEmpty()) {
 				facade.drop(id);
 				response.getMessages().add("El administrador categoria fue eliminado de forma satisfactoria");

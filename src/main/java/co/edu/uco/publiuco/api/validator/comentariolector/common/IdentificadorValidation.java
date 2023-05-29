@@ -5,7 +5,6 @@ import java.util.UUID;
 import co.edu.uco.publiuco.api.validator.Result;
 import co.edu.uco.publiuco.api.validator.Validation;
 import co.edu.uco.publiuco.utils.UtilObject;
-import co.edu.uco.publiuco.utils.UtilUUID;
 
 public class IdentificadorValidation implements Validation<UUID> {
 
@@ -22,9 +21,7 @@ public class IdentificadorValidation implements Validation<UUID> {
 		if(UtilObject.isNull(data)) {
 			result.addMessage("No es posible continuar con el identificador del comentario vacío");
 			
-		}else if(UtilUUID.isDefault(data)) {
-			result.addMessage("No es posible tener el identificador por defecto del comentario");
-		}
+		}	
 		return result;
 	}
 
